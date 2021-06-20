@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
 from datetime import datetime
+from urllib.request import urlopen
+from urllib.error import HTTPError
+from bs4 import BeautifulSoup
+
 
 # Create your views here.
 
@@ -21,3 +25,19 @@ def showpost(request, slug):
             return render(request, 'post.html', locals())
     except:
         return redirect ('/')
+
+def getTitle(request):
+    url = 'http://www.pythonscraping.com/pages/page1.html'
+    try:
+        html = urlopen(url)
+    except HTTPError as e:
+        return None
+    try:
+        bsObj = BeautifulSoup(html.read(), "lxml")
+        title = str(bsObj.body.h1)
+    except AttributeError as e:
+        return None
+    #posts = Post.objects.all()
+    #print(posts, type(posts))
+    #print(title, type(title))
+    return render(request, 'gettitle.html', locals())
