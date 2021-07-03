@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Post
 from datetime import datetime
@@ -24,7 +24,7 @@ def showpost(request, slug):
         if post != None:
             return render(request, 'post.html', locals())
     except:
-        return redirect ('/')
+        return redirect('/')
 
 def getTitle(request):
     url = 'http://www.pythonscraping.com/pages/page1.html'
