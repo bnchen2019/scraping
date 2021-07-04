@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Product
 from datetime import datetime
 from urllib.request import urlopen
 from urllib.error import HTTPError
@@ -41,3 +41,14 @@ def getTitle(request):
     #print(posts, type(posts))
     #print(title, type(title))
     return render(request, 'gettitle.html', locals())
+
+def listing(request):
+    products = Product.objects.all()	
+    return render(request, 'list.html', locals())
+
+def disp_detail(request, sku):
+    try:
+        p = Product.objects.get(sku=sku)
+    except Product.DoesNotExist:
+        raise Http404('找不到指定的品項編號')
+    return render(request, 'disp.html', locals())
