@@ -52,3 +52,30 @@ def disp_detail(request, sku):
     except Product.DoesNotExist:
         raise Http404('找不到指定的品項編號')
     return render(request, 'disp.html', locals())
+
+def index(request, tvno = 0):
+    tv_list = [{'name':'民視', 'tvcode':'XxJKnDLYZz4'},
+			{'name':'MUSIC', 'tvcode':'o4PfZFOSwbY'},
+			{'name':'KKBOX', 'tvcode':'hXg6jQ5Ea_Q'},
+			{'name':'華視', 'tvcode':'g9uJqP0hT_I'},
+			{'name':'中天', 'tvcode':'hgIfZz8STLk'},]
+    now = datetime.now()
+    hour = now.timetuple().tm_hour
+    tvno = tvno
+    tv = tv_list[tvno]
+    return render(request, 'indextv.html', locals())
+
+def carlist(request, maker=0):
+	car_maker = ['SAAB', 'Ford', 'Honda', 'Mazda', 'Nissan','Toyota' ]
+	car_list = [ [],
+			['Fiesta', 'Focus', 'Modeo', 'EcoSport', 'Kuga', 'Mustang'],
+			['Fit', 'Odyssey', 'CR-V', 'City', 'NSX'],
+			['Mazda3', 'Mazda5', 'Mazda6', 'CX-3', 'CX-5', 'MX-5'],
+			['Tida', 'March', 'Livina', 'Sentra', 'Teana', 'X-Trail', 'Juke', 'Murano'],
+			['Camry','Altis','Yaris','86','Prius','Vios', 'RAV4', 'Wish']
+			  ]
+	maker = maker
+	maker_name =  car_maker[maker]
+	cars = car_list[maker]
+	return render(request, 'carlist.html', locals())
+
