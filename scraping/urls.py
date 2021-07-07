@@ -15,17 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mainsite.views import homepage, showpost, getTitle, listing, disp_detail, index, carlist 
+from mysite.views import index, detail 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage),
-    path('post/<slug:slug>/', showpost),
-    path('list/', listing),
-    path('list/<str:sku>/', disp_detail),
-    path('gettitle', getTitle),
-    path('tv/', index),
-    path('tv/<int:tvno>/', index, name = 'tv-url'),
-    path('carlist/', carlist),
-    path('carlist/<int:maker>/', carlist, name='carlist-url'),
+    path('', index),
+    path('detail/<int:id>', detail, name = 'detail-url'),
 ]
