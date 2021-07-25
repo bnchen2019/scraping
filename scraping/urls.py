@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mysite.views import index, detail 
+from mysite.views import index, detail
+from mysite8.views import index2, listing, posting, contact, post2db
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', index2),
+    path('<int:pid>/<str:del_pass>', index2),
+    path('list/', listing),
+    path('post/', posting),
+    path('contact/', contact),
+    path('post2db/', post2db),
     path('detail/<int:id>', detail, name = 'detail-url'),
 ]

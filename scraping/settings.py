@@ -41,7 +41,21 @@ INSTALLED_APPS = [
     'markdown_deux',
     'mainsite',
     'mysite',
+    'mysite8',
+    'anymail',
+    'captcha',
 ]
+
+GOOGLE_RECAPTCHA_SECRET_KEY = 'changeme'
+
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "MAILGUN_API_KEY": "changeme",
+    "MAILGUN_SENDER_DOMAIN": 'changeme', 
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = "you@example.com" 
+SERVER_EMAIL = "your-server@example.com"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,7 +72,7 @@ ROOT_URLCONF = 'scraping.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'mysite/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'mysite8/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
